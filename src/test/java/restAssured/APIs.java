@@ -183,6 +183,7 @@ public class APIs {
 		System.out.println(RequestBody);
 		Response response2 = given().contentType("application/json").body(RequestBody).post(BINDataFromNAV);
 		System.out.println(response2.getBody().asString());
+		System.out.println(response2.getBody().asString());
 	}
 
 }
