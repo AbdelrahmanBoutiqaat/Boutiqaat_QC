@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="11" total="12" passed="1" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2023-06-06T14:26:33 AST" name="Default suite" finished-at="2023-06-06T14:26:36 AST" duration-ms="2976">
+    <groups>
+    </groups>
+    <test started-at="2023-06-06T14:26:33 AST" name="Default test" finished-at="2023-06-06T14:26:36 AST" duration-ms="2976">
+      <class name="restAssured.APIs">
+        <test-method is-config="true" signature="BeforeClass()[pri:0, instance:restAssured.APIs@7db12bb6]" started-at="2023-06-06T14:26:33 AST" name="BeforeClass" finished-at="2023-06-06T14:26:35 AST" duration-ms="2108" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- BeforeClass -->
+        <test-method signature="BINDataFromNAV()[pri:11, instance:restAssured.APIs@7db12bb6]" started-at="2023-06-06T14:26:35 AST" name="BINDataFromNAV" finished-at="2023-06-06T14:26:36 AST" duration-ms="841" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- BINDataFromNAV -->
+      </class> <!-- restAssured.APIs -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>

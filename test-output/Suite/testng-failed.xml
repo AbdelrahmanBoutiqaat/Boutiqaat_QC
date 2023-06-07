@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite thread-count="6" name="Failed suite [Suite]" guice-stage="DEVELOPMENT">
+  <test thread-count="6" name="Test(failed)">
+    <classes>
+      <class name="WMS.WMS_ADD_NEW_USER">
+        <methods>
+          <include name="Setup_Driver"/>
+          <include name="AfterClass"/>
+          <include name="Choose_user_store"/>
+        </methods>
+      </class> <!-- WMS.WMS_ADD_NEW_USER -->
+    </classes>
+  </test> <!-- Test(failed) -->
+</suite> <!-- Failed suite [Suite] -->
