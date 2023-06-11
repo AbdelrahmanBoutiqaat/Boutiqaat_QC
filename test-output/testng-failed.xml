@@ -3,11 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="restAssured.APIs">
+      <class name="WMS.Duplicate_User_Creation">
         <methods>
-          <include name="Login2"/>
+          <include name="Setup_Driver"/>
+          <include name="AfterClass"/>
+          <include name="submit"/>
         </methods>
-      </class> <!-- restAssured.APIs -->
+      </class> <!-- WMS.Duplicate_User_Creation -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
