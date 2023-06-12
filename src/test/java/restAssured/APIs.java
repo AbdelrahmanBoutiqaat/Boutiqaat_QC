@@ -27,6 +27,10 @@ public class APIs {
 	String OnPost = "https://staging-wms.boutiqaat.com/api/WMS/Movement";
 	String VieWlist = "https://staging-wms.boutiqaat.com/api/WMS/Movement";
 	String DocList = "https://staging-wms.boutiqaat.com/api/WMS/Movement";
+	String Sorting_Putaway_ON_LOAD = "https://staging-wms.boutiqaat.com/api/WMS/SortingItemBin";
+	String Sorting_Putaway_On_Item_Scan = "https://staging-wms.boutiqaat.com/api/WMS/SortingItemBin";
+	String Sorting_Putaway_On_Confirm = "https://staging-wms.boutiqaat.com/api/WMS/SortingItemBin";
+	String Sorting_Pegion_Hole_Release = "https://staging-wms.boutiqaat.com/api/WMS/FreeSortingBinToNAV";
 	String TokenID;
 
 	@BeforeClass
@@ -314,38 +318,30 @@ public class APIs {
 		System.out.println(response2.getBody().asString());
 		System.out.println("--------------------------------------------------------------");
 	}
+
 	@Test(priority = 21)
 	public void ViEwList() {
-		String RequestBody = "{\r\n"
-				+ "\"status\": \"7\",\r\n"
-				+ "\"DOCNO\": \"MS/2223/000000003059\",\r\n"
-				+ "\"userID\":\"12511\",\r\n"
-				+"\"TokenID\":\"" + TokenID + "\"" + ","
-				+ "\"Tag\": \"0\",\r\n"
-				+ "\"WHNO\": \"KWI01\",\r\n"
-				+ "\"DeviceID\": \"01D90\"\r\n"
-				+ "}";
+		String RequestBody = "{\r\n" + "\"status\": \"7\",\r\n" + "\"DOCNO\": \"MS/2223/000000003059\",\r\n"
+				+ "\"userID\":\"12511\",\r\n" + "\"TokenID\":\"" + TokenID + "\"" + "," + "\"Tag\": \"0\",\r\n"
+				+ "\"WHNO\": \"KWI01\",\r\n" + "\"DeviceID\": \"01D90\"\r\n" + "}";
 		System.out.println(RequestBody);
 		Response response2 = given().contentType("application/json").body(RequestBody).post(DocList);
 		System.out.println(response2.getBody().asString());
 		System.out.println("--------------------------------------------------------------");
 	}
+
 	/*--------------------------------Movement Put Lot Wise-------------------------------*/
 	@Test(priority = 21)
 	public void DOCLiST() {
-		String RequestBody = "{\r\n"
-				+ "    \"Status\": \"3\",\r\n"
-				+ "    \"userID\": \"12511\",\r\n"
-				+ "    \"ItemType\": \"2\",\r\n"
-				+ "\"TokenID\":\"" + TokenID + "\"" + ","
-				+ "    \"WHNO\": \"KWI01\",\r\n"
-				+ "    \"DeviceID\": \"01D90\"\r\n"
-				+ "}";
+		String RequestBody = "{\r\n" + "    \"Status\": \"3\",\r\n" + "    \"userID\": \"12511\",\r\n"
+				+ "    \"ItemType\": \"2\",\r\n" + "\"TokenID\":\"" + TokenID + "\"" + ","
+				+ "    \"WHNO\": \"KWI01\",\r\n" + "    \"DeviceID\": \"01D90\"\r\n" + "}";
 		System.out.println(RequestBody);
 		Response response2 = given().contentType("application/json").body(RequestBody).post(DocList);
 		System.out.println(response2.getBody().asString());
 		System.out.println("--------------------------------------------------------------");
 	}
+
 	@Test(priority = 22)
 	public void Page_ON_load() {
 		String RequestBody = "{\r\n" + "\"Status\": \"4\",\r\n" + "\"userID\": \"12511\",\r\n" + "\"TokenID\":\""
@@ -381,20 +377,92 @@ public class APIs {
 		System.out.println(response2.getBody().asString());
 		System.out.println("--------------------------------------------------------------");
 	}
+
 	@Test(priority = 25)
 	public void ViEwLIst() {
-		String RequestBody = "{\r\n"
-				+ "\"status\": \"7\",\r\n"
-				+ "\"DOCNO\": \"MS/2223/000000003059\",\r\n"
-				+ "\"userID\":\"12511\",\r\n"
-				+"\"TokenID\":\"" + TokenID + "\"" + ","
-				+ "\"Tag\": \"0\",\r\n"
-				+ "\"WHNO\": \"KWI01\",\r\n"
-				+ "\"DeviceID\": \"01D90\"\r\n"
-				+ "}";
+		String RequestBody = "{\r\n" + "\"status\": \"7\",\r\n" + "\"DOCNO\": \"MS/2223/000000003059\",\r\n"
+				+ "\"userID\":\"12511\",\r\n" + "\"TokenID\":\"" + TokenID + "\"" + "," + "\"Tag\": \"0\",\r\n"
+				+ "\"WHNO\": \"KWI01\",\r\n" + "\"DeviceID\": \"01D90\"\r\n" + "}";
 		System.out.println(RequestBody);
 		Response response2 = given().contentType("application/json").body(RequestBody).post(DocList);
 		System.out.println(response2.getBody().asString());
 		System.out.println("--------------------------------------------------------------");
 	}
+
+	/*------------------------------------Sorting Putaway Scree-----------------*/
+	// OnLoad
+	@Test(priority = 26)
+	public void On_load() {
+		String RequestBody = "{\r\n" + "    \"Status\": \"9\",\r\n" + "    \"userID\": \"12511\",\r\n"
+				+ "\"TokenID\":\"" + TokenID + "\"" + "," + "    \"DeviceID\": \"01D90\",\r\n"
+				+ "    \"WHNO\": \"KWI01\"\r\n" + "}";
+		System.out.println(RequestBody);
+		Response response2 = given().contentType("application/json").body(RequestBody).post(Sorting_Putaway_ON_LOAD);
+		System.out.println(response2.getBody().asString());
+		System.out.println("--------------------------------------------------------------");
+	}
+
+	@Test(priority = 27)
+	public void On_Item_Scan() {
+		String RequestBody = "{\r\n" + "    \"Status\":\"1\",\r\n" + "\"userID\":\"12511\",\r\n" + "\"TokenID\":\""
+				+ TokenID + "\"" + "," + "\"DeviceID\":\"222\",\r\n" + "\"WHNO\":\"KWI01\",\r\n"
+				+ "\"Barcode\":\"16597_20072859\"\r\n" + "}";
+		System.out.println(RequestBody);
+		Response response2 = given().contentType("application/json").body(RequestBody).post(Sorting_Putaway_ON_LOAD);
+		System.out.println(response2.getBody().asString());
+		System.out.println("--------------------------------------------------------------");
+	}
+
+	// ON Confirm
+	@Test(priority = 28)
+	public void On_Confirm() {
+		String RequestBody = "{\r\n" + "\"Status\": \"3\",\r\n" + "\"userID\": \"12511\",\r\n" + "\"TokenID\":\""
+				+ TokenID + "\"" + "," + "\"WHNO\": \"KWI01\",\r\n" + "\"DeviceID\": \"222\",\r\n"
+				+ "\"BinNo\": \"BPNA001\",\r\n" + "\"Barcode\": \"16783_20004997\",\r\n"
+				+ "\"DOCNO\":\"9981892722\"\r\n" + "\r\n" + "}";
+		System.out.println(RequestBody);
+		Response response2 = given().contentType("application/json").body(RequestBody).post(Sorting_Putaway_ON_LOAD);
+		System.out.println(response2.getBody().asString());
+		System.out.println("--------------------------------------------------------------");
+	}
+
+	// Reset
+	@Test(priority = 29)
+	public void Reset() {
+		String RequestBody = "{\r\n" + "    \"Status\": \"9\",\r\n" + "    \"userID\": \"12511\",\r\n"
+				+ "\"TokenID\":\"" + TokenID + "\"" + "," + "    \"DeviceID\": \"222\",\r\n"
+				+ "    \"WHNO\": \"KWI01\"\r\n" + "}";
+		System.out.println(RequestBody);
+		Response response2 = given().contentType("application/json").body(RequestBody).post(Sorting_Putaway_ON_LOAD);
+		System.out.println(response2.getBody().asString());
+		System.out.println("--------------------------------------------------------------");
+	}
+	/*---------------------------Sorting Pegion Hole Release ---------------------*/
+
+	@Test(priority = 30)
+	public void ON_LOAD() {
+		String RequestBody = "{\r\n" + "    \"Status\": \"7\",\r\n" + "    \"userID\": \"12511\",\r\n"
+				+ "\"TokenID\":\"" + TokenID + "\"" + "," + "    \"DeviceID\": \"01D90\",\r\n"
+				+ "    \"WHNO\": \"KWI01\"\r\n" + "}";
+		System.out.println(RequestBody);
+		Response response2 = given().contentType("application/json").body(RequestBody).post(Sorting_Putaway_ON_LOAD);
+		System.out.println(response2.getBody().asString());
+		System.out.println("--------------------------------------------------------------");
+	}
+
+	// BIN SCAN
+	@Test(priority = 31)
+	public void BIN_SCAN() {
+		String RequestBody = "{\r\n" + "    \"Status\": \"6\",\r\n" + "    \"userID\": \"12511\",\r\n"
+				+"\"TokenID\":\"" + TokenID + "\"" + ","
+				+ "    \"DeviceID\": \"222\",\r\n" + "    \"WHNO\": \"KWI01\",\r\n" + "    \"binno\": \"ZH-093\",\r\n"
+				+ "    \"DocNo\": \"100515429\",\r\n"
+				+ "    \"OfsBaseUrl\":\"https://staging-ofsapi.boutiqaat.com\"\r\n" + "\r\n" + "}";
+		System.out.println(RequestBody);
+		Response response2 = given().contentType("application/json").body(RequestBody)
+				.post(Sorting_Pegion_Hole_Release);
+		System.out.println(response2.getBody().asString());
+		System.out.println("--------------------------------------------------------------");
+	}
+
 }
