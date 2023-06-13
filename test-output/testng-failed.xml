@@ -3,13 +3,28 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="WMS.Duplicate_User_Creation">
+      <class name="restAssured.APIs">
         <methods>
-          <include name="Setup_Driver"/>
-          <include name="AfterClass"/>
-          <include name="submit"/>
+          <include name="Page_ON_Load"/>
+          <include name="DOCLIST"/>
+          <include name="DOCLiST"/>
+          <include name="OnBin_Scan"/>
+          <include name="OnPost"/>
+          <include name="ConFirm"/>
+          <include name="onLoad"/>
+          <include name="Complete"/>
+          <include name="Empty_Bin"/>
+          <include name="OnBarCode_Scan"/>
+          <include name="POst"/>
+          <include name="Post"/>
+          <include name="Page_ON_load"/>
+          <include name="BeforeClass"/>
+          <include name="Undo"/>
+          <include name="Onload_Check"/>
+          <include name="ConfIrm"/>
+          <include name="On_Confirm"/>
         </methods>
-      </class> <!-- WMS.Duplicate_User_Creation -->
+      </class> <!-- restAssured.APIs -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
