@@ -5,24 +5,8 @@
     <classes>
       <class name="restAssured.APIs">
         <methods>
-          <include name="Page_ON_Load"/>
-          <include name="DOCLIST"/>
-          <include name="DOCLiST"/>
-          <include name="OnBin_Scan"/>
-          <include name="OnPost"/>
-          <include name="ConFirm"/>
-          <include name="onLoad"/>
-          <include name="Complete"/>
-          <include name="Empty_Bin"/>
-          <include name="OnBarCode_Scan"/>
-          <include name="POst"/>
-          <include name="Post"/>
-          <include name="Page_ON_load"/>
+          <include name="pNA"/>
           <include name="BeforeClass"/>
-          <include name="Undo"/>
-          <include name="Onload_Check"/>
-          <include name="ConfIrm"/>
-          <include name="On_Confirm"/>
         </methods>
       </class> <!-- restAssured.APIs -->
     </classes>
