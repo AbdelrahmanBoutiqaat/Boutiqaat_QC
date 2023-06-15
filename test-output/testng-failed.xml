@@ -5,8 +5,44 @@
     <classes>
       <class name="restAssured.APIs">
         <methods>
-          <include name="pNA"/>
+          <include name="ConFiRm2"/>
+          <include name="Confirm1"/>
+          <include name="Page_ON_Load"/>
+          <include name="DOCLiST"/>
+          <include name="OnBin_Scan"/>
+          <include name="PNA_"/>
+          <include name="ConFirm"/>
+          <include name="EMpty_Bin"/>
+          <include name="Complete"/>
+          <include name="Empty_Bin"/>
+          <include name="POST"/>
+          <include name="POst"/>
+          <include name="ONLOaD_DOC_GENERATION"/>
+          <include name="Other_Bins"/>
+          <include name="PNA"/>
+          <include name="DOUCMENT_LIST"/>
           <include name="BeforeClass"/>
+          <include name="ONLOAD_DOc_GENERATION"/>
+          <include name="PNA_other_Bins"/>
+          <include name="DOCLIST"/>
+          <include name="OnPost"/>
+          <include name="VIEW__LIST"/>
+          <include name="DOCUMENT_LIST"/>
+          <include name="VIEWLIST"/>
+          <include name="ConFiRm"/>
+          <include name="onLoad"/>
+          <include name="OnBarCode_Scan"/>
+          <include name="CoNfirm"/>
+          <include name="Post"/>
+          <include name="VIEW__LIST_find"/>
+          <include name="PNa"/>
+          <include name="pNA"/>
+          <include name="Page_ON_load"/>
+          <include name="CC_DOC_LIST"/>
+          <include name="Undo"/>
+          <include name="Onload_Check"/>
+          <include name="ConfIrm"/>
+          <include name="On_Confirm"/>
         </methods>
       </class> <!-- restAssured.APIs -->
     </classes>

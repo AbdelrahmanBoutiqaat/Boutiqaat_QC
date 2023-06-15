@@ -44,6 +44,8 @@ public class APIs {
 	String Picking = "https://staging-wms.boutiqaat.com/api/WMS/Picking";
 	String PNAPicking = "https://staging-wms.boutiqaat.com/api/WMS/PNAPicking";
 	String PNAPicking_Confirm2 = "https://staging-wms.boutiqaat.com/api/WMS/LiveBINDataFromNAV";
+	String Return_Picking = "https://staging-wms.boutiqaat.com/api/WMS/ReturnCancelPicking";
+	String GRN_Putaway = "https://staging-wms.boutiqaat.com/api/WMS/PutAway";
 	String TokenID;
 
 	@BeforeClass
@@ -1392,30 +1394,292 @@ public class APIs {
 		assertEquals(jsonpath.get("StatusCode").toString(), "200");
 		System.out.println("--------------------------------------------------------------");
 	}
-	
+
 	// PNA
-		@Test(priority = 76)
-		public void pNA() {
-			String RequestBody = "{\r\n"
-					+ "    \"Status\": \"13\",\r\n"
-					+ "    \"userID\": \"12511\",\r\n"
-					+ "\"TokenID\":\"" + TokenID + "\"" + ","
-					+ "    \"PickNo\": \"WHPICK-2223-00104504\",\r\n"
-					+ "    \"Qty\": \"0\",\r\n"
-					+ "    \"BinNo\": \"\",\r\n"
-					+ "    \"Barcode\": \"FS-00083231\",\r\n"
-					+ "    \"flag\": \"1\",\r\n"
-					+ "    \"SBcode\": \"\",\r\n"
-					+ "    \"SRNO\": \"146409\",\r\n"
-					+ "    \"Syncid\": \"48850402\",\r\n"
-					+ "    \"WHNO\": \"KWI01\",\r\n"
-					+ "    \"DeviceID\": \"PNA01\"\r\n"
-					+ "}";
-			System.out.println(RequestBody);
-			Response response2 = given().contentType("application/json").body(RequestBody).post(PNAPicking);
-			System.out.println(response2.getBody().asString());
-			JsonPath jsonpath = response2.jsonPath();
-			assertEquals(jsonpath.get("StatusCode").toString(), "200");
-			System.out.println("--------------------------------------------------------------");
-		}
+	@Test(priority = 77)
+	public void pNA() {
+		String RequestBody = "{\r\n" + "    \"Status\": \"13\",\r\n" + "    \"userID\": \"12511\",\r\n"
+				+ "\"TokenID\":\"" + TokenID + "\"" + "," + "    \"PickNo\": \"WHPICK-2223-00104504\",\r\n"
+				+ "    \"Qty\": \"0\",\r\n" + "    \"BinNo\": \"\",\r\n" + "    \"Barcode\": \"FS-00083231\",\r\n"
+				+ "    \"flag\": \"1\",\r\n" + "    \"SBcode\": \"\",\r\n" + "    \"SRNO\": \"146409\",\r\n"
+				+ "    \"Syncid\": \"48850402\",\r\n" + "    \"WHNO\": \"KWI01\",\r\n"
+				+ "    \"DeviceID\": \"PNA01\"\r\n" + "}";
+		System.out.println(RequestBody);
+		Response response2 = given().contentType("application/json").body(RequestBody).post(PNAPicking);
+		System.out.println(response2.getBody().asString());
+		JsonPath jsonpath = response2.jsonPath();
+		assertEquals(jsonpath.get("StatusCode").toString(), "200");
+		System.out.println("--------------------------------------------------------------");
+	}
+
+	/*---------------------------------Return Picking ---------------------------------*/
+	// DOCUMENT LIST
+	@Test(priority = 78)
+	public void DOCUMENT_LIST() {
+		String RequestBody = "{\r\n" + "    \"status\": \"3\",\r\n" + "    \"PickNo\": \"WHPICK-2223-00104502\",\r\n"
+				+ "    \"userID\": \"12511\",\r\n" + "\"TokenID\":\"" + TokenID + "\"" + "," + "    \"Tag\": \"0\",\r\n"
+				+ "    \"WHNO\": \"KWI01\",\r\n" + "    \"DeviceID\": \"PNA01\"\r\n" + "}";
+		System.out.println(RequestBody);
+		Response response2 = given().contentType("application/json").body(RequestBody).post(Return_Picking);
+		System.out.println(response2.getBody().asString());
+		JsonPath jsonpath = response2.jsonPath();
+		assertEquals(jsonpath.get("StatusCode").toString(), "200");
+		System.out.println("--------------------------------------------------------------");
+	}
+
+	// ONLOAD DOC GENERATION
+	@Test(priority = 79)
+	public void ONLOAD_DOC_Gene() {
+		String RequestBody = "{\r\n" + "    \"Status\": \"3\",\r\n" + "    \"userID\": \"12511\",\r\n"
+				+ "\"TokenID\":\"" + TokenID + "\"" + "," + "    \"Tag\": \"0\",\r\n"
+				+ "    \"PickNo\": \"MR_1669185030\",\r\n" + "    \"WHNO\": \"KWI01\",\r\n"
+				+ "    \"DeviceID\": \"RT050\"\r\n" + "}";
+		System.out.println(RequestBody);
+		Response response2 = given().contentType("application/json").body(RequestBody).post(Return_Picking);
+		System.out.println(response2.getBody().asString());
+		JsonPath jsonpath = response2.jsonPath();
+		assertEquals(jsonpath.get("StatusCode").toString(), "200");
+		System.out.println("--------------------------------------------------------------");
+	}
+
+	// ONLOAD PREV SCANNED DOC
+	@Test(priority = 80)
+	public void ONLOAD_Prev() {
+		String RequestBody = "{\r\n" + "    \"Status\": \"6\",\r\n" + "    \"userID\": \"12511\",\r\n"
+				+ "    \"PickNo\": \"MR_1669185030\",\r\n" + "\"TokenID\":\"" + TokenID + "\"" + ","
+				+ "    \"Tag\": \"0\",\r\n" + "    \"WHNO\": \"KWI01\",\r\n" + "    \"DeviceID\": \"RT050\"\r\n" + "}";
+		System.out.println(RequestBody);
+		Response response2 = given().contentType("application/json").body(RequestBody).post(Return_Picking);
+		System.out.println(response2.getBody().asString());
+		JsonPath jsonpath = response2.jsonPath();
+		assertEquals(jsonpath.get("StatusCode").toString(), "200");
+		System.out.println("--------------------------------------------------------------");
+	}
+
+	// OConfirm
+	@Test(priority = 81)
+	public void CoNfirm() {
+		String RequestBody = "{\r\n" + "    \"Status\": \"4\",\r\n" + "    \"userID\": \"12511\",\r\n"
+				+ "\"TokenID\":\"" + TokenID + "\"" + "," + "    \"PickNo\": \"MR_1669185030\",\r\n"
+				+ "    \"Qty\": \"1\",\r\n" + "    \"BinNo\": \"RPASS001\",\r\n"
+				+ "    \"Barcode\": \"FS-00077133_LOT00039332\",\r\n" + "    \"flag\": \"0\",\r\n"
+				+ "    \"SBcode\": \"\",\r\n" + "    \"SRNO\": \"795039\",\r\n" + "    \"Syncid\": \"0\",\r\n"
+				+ "    \"WHNO\": \"KWI01\",\r\n" + "    \"DeviceID\": \"RT050\"\r\n" + "}";
+		System.out.println(RequestBody);
+		Response response2 = given().contentType("application/json").body(RequestBody).post(Return_Picking);
+		System.out.println(response2.getBody().asString());
+		JsonPath jsonpath = response2.jsonPath();
+		assertEquals(jsonpath.get("StatusCode").toString(), "200");
+		System.out.println("--------------------------------------------------------------");
+	}
+
+	// View List
+	@Test(priority = 82)
+	public void ViewLISt() {
+		String RequestBody = "{\r\n" + "    \"status\": \"3\",\r\n" + "    \"PickNo\": \"MR_1669184997\",\r\n"
+				+ "    \"userID\": \"12511\",\r\n" + "\"TokenID\":\"" + TokenID + "\"" + "," + "    \"Tag\": \"0\",\r\n"
+				+ "    \"WHNO\": \"KWI01\",\r\n" + "    \"DeviceID\": \"RT050\"\r\n" + "}";
+		System.out.println(RequestBody);
+		Response response2 = given().contentType("application/json").body(RequestBody).post(Return_Picking);
+		System.out.println(response2.getBody().asString());
+		JsonPath jsonpath = response2.jsonPath();
+		assertEquals(jsonpath.get("StatusCode").toString(), "200");
+		System.out.println("--------------------------------------------------------------");
+	}
+
+	// View List find
+	@Test(priority = 83)
+	public void View_List_find() {
+		String RequestBody = "{\r\n" + "\"status\": \"3\",\r\n" + "\"PickNo\": \"MR_1669184997\",\r\n"
+				+ "\"userID\": \"12511\",\r\n" + "\"TokenID\":\"" + TokenID + "\"" + "," + "\"Tag\": \"0\",\r\n"
+				+ "\"WHNO\": \"KWI01\",\r\n" + "\"DeviceID\": \"RT050\"\r\n" + "\r\n" + "}";
+		System.out.println(RequestBody);
+		Response response2 = given().contentType("application/json").body(RequestBody).post(Return_Picking);
+		System.out.println(response2.getBody().asString());
+		JsonPath jsonpath = response2.jsonPath();
+		assertEquals(jsonpath.get("StatusCode").toString(), "200");
+		System.out.println("--------------------------------------------------------------");
+	}
+
+	// PNA
+	@Test(priority = 84)
+	public void PNa() {
+		String RequestBody = "{\r\n" + "    \"Status\": \"4\",\r\n" + "    \"userID\": \"12511\",\r\n"
+				+ "\"TokenID\":\"" + TokenID + "\"" + "," + "    \"PickNo\": \"MR_1669184948\",\r\n"
+				+ "    \"Qty\": \"0\",\r\n" + "    \"BinNo\": \"RPASS001\",\r\n"
+				+ "    \"Barcode\": \"MU-00007482_LOT00050763\",\r\n" + "    \"flag\": \"1\",\r\n"
+				+ "    \"SBcode\": \"\",\r\n" + "    \"SRNO\": \"794909\",\r\n" + "    \"Syncid\": \"0\",\r\n"
+				+ "    \"WHNO\": \"KWI01\",\r\n" + "    \"DeviceID\": \"RT050\"\r\n" + "}";
+		System.out.println(RequestBody);
+		Response response2 = given().contentType("application/json").body(RequestBody).post(Return_Picking);
+		System.out.println(response2.getBody().asString());
+		JsonPath jsonpath = response2.jsonPath();
+		assertEquals(jsonpath.get("StatusCode").toString(), "200");
+		System.out.println("--------------------------------------------------------------");
+	}
+	/*-----------------------Cancel Picking------------------------------*/
+
+	// Document List
+	@Test(priority = 85)
+	public void DOcument_list() {
+		String RequestBody = "{\r\n" + "    \"Status\": \"1\",\r\n" + "    \"DocType\": \"Cancelled\",\r\n"
+				+ "    \"userID\": \"12511\",\r\n" + "\"TokenID\":\"" + TokenID + "\"" + "," + "    \"Tag\": \"0\",\r\n"
+				+ "    \"WHNO\": \"KWI01\",\r\n" + "    \"DeviceID\": \"RT050\"\r\n" + "}";
+		System.out.println(RequestBody);
+		Response response2 = given().contentType("application/json").body(RequestBody).post(Return_Picking);
+		System.out.println(response2.getBody().asString());
+		JsonPath jsonpath = response2.jsonPath();
+		assertEquals(jsonpath.get("StatusCode").toString(), "200");
+		System.out.println("--------------------------------------------------------------");
+	}
+
+	// ONLOAD DOC GENERATION
+	@Test(priority = 86)
+	public void ONLOAD_DOc_GENERATION() {
+		String RequestBody = "{\r\n" + "    \"Status\": \"3\",\r\n" + "    \"userID\": \"12511\",\r\n"
+				+ "\"TokenID\":\"" + TokenID + "\"" + "," + "    \"Tag\": \"0\",\r\n"
+				+ "    \"PickNo\": \"MC_1669297848\",\r\n" + "    \"WHNO\": \"KWI01\",\r\n"
+				+ "    \"DeviceID\": \"RT050\"\r\n" + "}";
+		System.out.println(RequestBody);
+		Response response2 = given().contentType("application/json").body(RequestBody).post(Return_Picking);
+		System.out.println(response2.getBody().asString());
+		JsonPath jsonpath = response2.jsonPath();
+		assertEquals(jsonpath.get("StatusCode").toString(), "200");
+		System.out.println("--------------------------------------------------------------");
+	}
+
+	// ONLOAD PREV SCANNED DOC
+	@Test(priority = 87)
+	public void ONLOAD_Prev_GENERATION() {
+		String RequestBody = "{\r\n" + "    \"Status\": \"6\",\r\n" + "    \"userID\": \"12511\",\r\n"
+				+ "    \"PickNo\": \"MC_1669297848\",\r\n" + "\"TokenID\":\"" + TokenID + "\"" + ","
+				+ "    \"Tag\": \"0\",\r\n" + "    \"WHNO\": \"KWI01\",\r\n" + "    \"DeviceID\": \"RT050\"\r\n" + "}";
+		System.out.println(RequestBody);
+		Response response2 = given().contentType("application/json").body(RequestBody).post(Return_Picking);
+		System.out.println(response2.getBody().asString());
+		JsonPath jsonpath = response2.jsonPath();
+		assertEquals(jsonpath.get("StatusCode").toString(), "200");
+		System.out.println("--------------------------------------------------------------");
+	}
+
+	// CONFIRM
+	@Test(priority = 88)
+	public void ConFiRm() {
+		String RequestBody = "{\r\n" + "    \"Status\": \"4\",\r\n" + "    \"userID\": \"12511\",\r\n"
+				+ "\"TokenID\":\"" + TokenID + "\"" + "," + "    \"PickNo\": \"MC_1669297941\",\r\n"
+				+ "    \"Qty\": \"1\",\r\n" + "    \"BinNo\": \"KWI01-SH1-S001-01S01\",\r\n"
+				+ "    \"Barcode\": \"MU-00010416_LOT00057497\",\r\n" + "    \"flag\": \"0\",\r\n"
+				+ "    \"SBcode\": \"\",\r\n" + "    \"SRNO\": \"796088\",\r\n" + "    \"Syncid\": \"0\",\r\n"
+				+ "    \"WHNO\": \"KWI01\",\r\n" + "    \"DeviceID\": \"RT050\"\r\n" + "}";
+		System.out.println(RequestBody);
+		Response response2 = given().contentType("application/json").body(RequestBody).post(Return_Picking);
+		System.out.println(response2.getBody().asString());
+		JsonPath jsonpath = response2.jsonPath();
+		assertEquals(jsonpath.get("StatusCode").toString(), "200");
+		System.out.println("--------------------------------------------------------------");
+	}
+
+	// Confirm2
+	@Test(priority = 89)
+	public void ConFiRm2() {
+		String RequestBody = "{\r\n" + "    \"Status\": \"2\",\r\n" + "    \"userID\": \"12511\",\r\n"
+				+ "    \"PickNo\": \"MC_1669297912\",\r\n" + "\"TokenID\":\"" + TokenID + "\"" + ","
+				+ "    \"Tag\": \"0\",\r\n" + "    \"WHNO\": \"KWI01\",\r\n" + "    \"DeviceID\": \"RT050\"\r\n" + "}";
+		System.out.println(RequestBody);
+		Response response2 = given().contentType("application/json").body(RequestBody).post(Return_Picking);
+		System.out.println(response2.getBody().asString());
+		JsonPath jsonpath = response2.jsonPath();
+		assertEquals(jsonpath.get("StatusCode").toString(), "200");
+		System.out.println("--------------------------------------------------------------");
+	}
+
+	// VIEWLIST
+	@Test(priority = 90)
+	public void VIEW__LIST() {
+		String RequestBody = "{\r\n" + "    \"status\": \"3\",\r\n" + "    \"PickNo\": \"MC_1669297848\",\r\n"
+				+ "    \"userID\": \"12511\",\r\n" + "\"TokenID\":\"" + TokenID + "\"" + "," + "    \"Tag\": \"0\",\r\n"
+				+ "    \"WHNO\": \"KWI01\",\r\n" + "    \"DeviceID\": \"RT050\"\r\n" + "}";
+		System.out.println(RequestBody);
+		Response response2 = given().contentType("application/json").body(RequestBody).post(Return_Picking);
+		System.out.println(response2.getBody().asString());
+		JsonPath jsonpath = response2.jsonPath();
+		assertEquals(jsonpath.get("StatusCode").toString(), "200");
+		System.out.println("--------------------------------------------------------------");
+	}
+
+	// VIEWLIST
+	@Test(priority = 91)
+	public void VIEW__LIST_find() {
+		String RequestBody = "{\r\n" + "    \"status\": \"3\",\r\n" + "    \"PickNo\": \"MC_1669297848\",\r\n"
+				+ "    \"userID\": \"12511\",\r\n" + "\"TokenID\":\"" + TokenID + "\"" + "," + "    \"Tag\": \"0\",\r\n"
+				+ "    \"WHNO\": \"KWI01\",\r\n" + "    \"DeviceID\": \"RT050\"\r\n" + "}";
+		System.out.println(RequestBody);
+		Response response2 = given().contentType("application/json").body(RequestBody).post(Return_Picking);
+		System.out.println(response2.getBody().asString());
+		JsonPath jsonpath = response2.jsonPath();
+		assertEquals(jsonpath.get("StatusCode").toString(), "200");
+		System.out.println("--------------------------------------------------------------");
+	}
+
+	// PNA
+	@Test(priority = 92)
+	public void PNA_() {
+		String RequestBody = "{\r\n" + "    \"Status\": \"4\",\r\n" + "    \"userID\": \"12511\",\r\n"
+				+ "\"TokenID\":\"" + TokenID + "\"" + "," + "    \"PickNo\": \"MC_1669297789\",\r\n"
+				+ "    \"Qty\": \"0\",\r\n" + "    \"BinNo\": \"\",\r\n" + "    \"Barcode\": \"027262\",\r\n"
+				+ "    \"flag\": \"1\",\r\n" + "    \"SBcode\": \"\",\r\n" + "    \"SRNO\": \"796078\",\r\n"
+				+ "    \"Syncid\": \"0\",\r\n" + "    \"WHNO\": \"KWI01\",\r\n" + "    \"DeviceID\": \"RT050\"\r\n"
+				+ "}";
+		System.out.println(RequestBody);
+		Response response2 = given().contentType("application/json").body(RequestBody).post(Return_Picking);
+		System.out.println(response2.getBody().asString());
+		JsonPath jsonpath = response2.jsonPath();
+		assertEquals(jsonpath.get("StatusCode").toString(), "200");
+		System.out.println("--------------------------------------------------------------");
+	}
+
+	/*-----------------------------GRN Putaway----------------------------------*/
+//ONLOAD DOC GENERATION
+	@Test(priority = 93)
+	public void ONLOaD_DOC_GENERATION() {
+		String RequestBody = "{\r\n" + "    \"Status\": \"7\",\r\n" + "    \"userID\": \"12511\",\r\n"
+				+ "\"TokenID\":\"" + TokenID + "\"" + "," + "    \"PutNo\": \"WHPUT-2223-00181256\",\r\n"
+				+ "    \"WHNO\": \"KWI01\",\r\n" + "    \"DeviceID\": \"PA095\"\r\n" + "}";
+		System.out.println(RequestBody);
+		Response response2 = given().contentType("application/json").body(RequestBody).post(GRN_Putaway);
+		System.out.println(response2.getBody().asString());
+		JsonPath jsonpath = response2.jsonPath();
+		assertEquals(jsonpath.get("StatusCode").toString(), "200");
+		System.out.println("--------------------------------------------------------------");
+	}
+
+//ONLOAD PREV SCANNED ITEMS
+	@Test(priority = 94)
+	public void ONLOAD_PREV_SCANNED_ITEMS() {
+		String RequestBody = "{\r\n" + "    \"Status\": \"6\",\r\n" + "    \"userID\": \"12511\",\r\n"
+				+ "    \"PutNo\": \"WHPUT-2223-00181256\",\r\n" + "\"TokenID\":\"" + TokenID + "\"" + ","
+				+ "    \"Tag\": \"0\",\r\n" + "    \"WHNO\": \"KWI01\",\r\n" + "    \"DeviceID\": \"PA095\"\r\n" + "}";
+		System.out.println(RequestBody);
+		Response response2 = given().contentType("application/json").body(RequestBody).post(GRN_Putaway);
+		System.out.println(response2.getBody().asString());
+		JsonPath jsonpath = response2.jsonPath();
+		assertEquals(jsonpath.get("StatusCode").toString(), "200");
+		System.out.println("--------------------------------------------------------------");
+	}
+
+//DOC LIST BARCODE SCAN
+	@Test(priority = 95)
+	public void DOC_LIST_BARCODE_SCAN() {
+		String RequestBody = "{\r\n" + "    \"Status\": \"6\",\r\n" + "    \"userID\": \"12511\",\r\n"
+				+ "    \"PutNo\": \"WHPUT-2223-00181256\",\r\n" + "\"TokenID\":\"" + TokenID + "\"" + ","
+				+ "    \"Tag\": \"0\",\r\n" + "    \"WHNO\": \"KWI01\",\r\n"
+				+ "    \"DeviceID\": \"PA095\"\r\n" + "}";
+		System.out.println(RequestBody);
+		Response response2 = given().contentType("application/json").body(RequestBody).post(GRN_Putaway);
+		System.out.println(response2.getBody().asString());
+		JsonPath jsonpath = response2.jsonPath();
+		assertEquals(jsonpath.get("StatusCode").toString(), "200");
+		System.out.println("--------------------------------------------------------------");
+	}
+
 }
